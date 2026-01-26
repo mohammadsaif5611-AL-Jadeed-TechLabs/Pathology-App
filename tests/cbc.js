@@ -195,11 +195,11 @@ y += 7; // row spacing
   pdf.text("DIFF. LEUCOCYTE COUNT", 20, y);
   y += 6;
 
- row("NEUTROPHILS", data.Neutrophils, "%", ["40 -75"], data.Sex, 10);
-row("LYMPHOCYTES", data.Lymphocytes, "%", ["20 -45"], data.Sex, 10);
-row("EOSINOPHILS", data.Eosinophils, "%", ["1 -6"], data.Sex, 10);
-row("MONOCYTES", data.Monocytes, "%", ["2 -10"], data.Sex, 10);
-row("BASOPHILS", data.Basophils, "%", ["0 -1"], data.Sex, 10);
+ row("NEUTROPHILS", data.Neutrophils, "%", ["40 - 75"], data.Sex, 10);
+row("LYMPHOCYTES", data.Lymphocytes, "%", ["20 - 45"], data.Sex, 10);
+row("EOSINOPHILS", data.Eosinophils, "%", ["1 - 6"], data.Sex, 10);
+row("MONOCYTES", data.Monocytes, "%", ["2 - 10"], data.Sex, 10);
+row("BASOPHILS", data.Basophils, "%", ["0 - 1"], data.Sex, 10);
 
 
   row("RBC", data.RBC, "million/cumm", ["F: 4.1- 4.7", "M: 4.7-5.4"], data.Sex);
@@ -212,7 +212,7 @@ row("BASOPHILS", data.Basophils, "%", ["0 -1"], data.Sex, 10);
   row("MCHC", data.MCHC, "g/dl", ["31 - 36"], data.Sex);
   row("RDW-CV", data.RDW_CV, "%", ["10 - 15"], data.Sex);
   row("RDW-SD", data.RDW_SD, "fl", ["39 - 46"], data.Sex);
-  row("PLATELET COUNT", data.Platelet, "/cumm", ["1,50,000-4,50,000"], data.Sex);
+  row("PLATELET COUNT", data.Platelet, "/cumm", ["1,50,000 - 4,50,000"], data.Sex);
   row("MPV", data.MPV, "fl", ["6.5 - 11"], data.Sex);
   row("PCT", data.PCT, "%", ["0.100 - 0.280"], data.Sex);
   row("PDW", data.PDW, "%", ["9.0 - 17.0"], data.Sex);
