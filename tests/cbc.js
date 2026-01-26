@@ -183,7 +183,12 @@ const pdf = new jsPDFLib("p", "mm", "a4");
 
 
  
-y += 10;
+if (Array.isArray(ref)) {
+  y += 9;   // Female + Male (2 lines)
+} else {
+  y += 5;   // Single-line reference
+}
+
 
 }
 
