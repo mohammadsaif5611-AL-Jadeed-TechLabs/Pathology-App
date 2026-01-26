@@ -1,8 +1,63 @@
+// ================= GLOBAL LAYOUT CONSTANTS =================
+const TOP_MARGIN = 56;     // ≈ old 160pt
+const LEFT = 20;
+const RIGHT = 195;
+const FOOTER_GAP = 0;
+const PAGE_BOTTOM = 270;
+
+
+let topImgBase64 = null;
+let bottomImgBase64 = null;
+
+function loadImages() {
+  return Promise.all([
+    loadImageToBase64("../assets/top.jpeg").then(b64 => topImgBase64 = b64),
+    loadImageToBase64("../assets/bottom.jpeg").then(b64 => bottomImgBase64 = b64)
+  ]);
+}
+
+function loadImageToBase64(path) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = function () {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+      resolve(canvas.toDataURL("image/jpeg"));
+    };
+    img.onerror = reject;
+    img.src = path;
+  });
+}
+window.onload = async () => {
+  await loadImages();
+  console.log("Images loaded");
+};
+
+
+// ================= GENERATE PDF =================
 function generatePDF() {
-  if (!window.jspdf) {
-    alert("jsPDF library not loaded");
+
+  if (!topImgBase64 || !bottomImgBase64) {
+    alert("Images still loading, please wait 1 second...");
     return;
   }
+
+const jsPDFLib =
+  window.jspdf?.jsPDF || window.jsPDF;
+
+if (!jsPDFLib) {
+  alert("jsPDF library not loaded");
+  return;
+}
+
+
+
+  
+
 
   const data = {
     "Patient Name": patient_name.value,
@@ -33,94 +88,114 @@ function generatePDF() {
     "PDW": PDW.value
   };
 
-  createCBCPdf(data, false);
-  createCBCPdf(data, true);
+  createCBCPdf(data, false); // NORMAL
+  createCBCPdf(data, true);  // COLORED
 }
 
+// ================= CREATE CBC PDF =================
 function createCBCPdf(data, colored = false) {
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF("p", "mm", "a4");
+const jsPDFLib =
+  window.jspdf?.jsPDF || window.jsPDF;
 
-  let y = 30;
-  const pageBottom = 270;
+const pdf = new jsPDFLib("p", "mm", "a4");
 
-  if (colored) {
-    pdf.addImage("/assets/top.jpeg", "JPEG", 0, 0, 210, 30);
-    y = 40;
-  }
 
+  let y = TOP_MARGIN;
+
+  // ---------- TOP IMAGE ----------
+ if (colored && topImgBase64) {
+  pdf.addImage(topImgBase64, "JPEG", 0, 0, 210, 30);
+}
+
+
+  // ---------- PATIENT DETAILS ----------
   pdf.setFont("Helvetica", "bold");
-  pdf.setFontSize(11);
+  pdf.setFontSize(11.2);
 
-  pdf.text(`Patient : ${data["Patient Name"]}`, 15, y);
+  pdf.text(`Patient : ${data["Patient Name"]}`, LEFT, y);
   pdf.text(`Age/Sex : ${data.Age} / ${data.Sex}`, 140, y);
 
   y += 8;
-  pdf.text(`Reff. By : ${data["Reff. By"]}`, 15, y);
+  pdf.text(`Reff. By : ${data["Reff. By"]}`, LEFT, y);
   pdf.text(`Date : ${data.Date}`, 140, y);
 
   y += 8;
-  pdf.text(`Sample : ${data.Sample}`, 15, y);
+  pdf.text(`Sample : ${data.Sample}`, LEFT, y);
   pdf.text(`LRN : ${data.LRN}`, 140, y);
 
   y += 15;
 
-  pdf.setFontSize(14);
+  // ---------- HEADING ----------
+  pdf.setFontSize(13.2);
   pdf.text("COMPLETE BLOOD COUNT (CBC)", 105, y, { align: "center" });
   y += 10;
 
-  pdf.setFontSize(11);
+  // ---------- TABLE HEADER ----------
+  pdf.setFontSize(12);
   pdf.rect(10, y - 6, 190, 8);
-  pdf.text("INVESTIGATION", 12, y);
+  pdf.text("INVESTIGATION", 20, y);
   pdf.text("RESULT", 90, y);
-  pdf.text("UNIT", 115, y);
-  pdf.text("REFERENCE", 145, y);
+  pdf.text("UNIT", 123, y);
+  pdf.text("REFERENCE", 160, y);
 
   y += 10;
 
+  // ---------- PAGE BREAK ----------
   function nextPageCheck() {
-    if (y > pageBottom) {
+    if (y > PAGE_BOTTOM) {
       pdf.addPage();
-      y = 20;
+      y = TOP_MARGIN;
     }
   }
 
-  function row(name, result, unit, ref, sex) {
-    nextPageCheck();
+  // ---------- ROW FUNCTION ----------
+ function row(name, result, unit, ref, sex, indent = 0) {
 
-    let { flag, abnormal } = checkFlag(result, ref, sex);
+  nextPageCheck();
 
-    pdf.setFont("Helvetica", "normal");
-    pdf.setTextColor(0);
-    pdf.text(name, 12, y);
+  let { flag, abnormal } = checkFlag(result, ref, sex);
 
-    if (abnormal) {
-      pdf.setTextColor(255, 0, 0);
-      pdf.setFont("Helvetica", "bold");
-    }
+  pdf.setFont("Helvetica", "normal");
+  pdf.setTextColor(0);
+  pdf.text(name, 20 + indent, y);
 
-    pdf.text(String(result), 90, y);
-    if (flag) pdf.text(flag, 102, y);
-
-    pdf.setTextColor(0);
-    pdf.setFont("Helvetica", "normal");
-    pdf.text(unit, 115, y);
-    pdf.text(ref[0], 145, y);
-
-    y += 7;
+  if (abnormal) {
+    pdf.setTextColor(255, 0, 0);
+    pdf.setFont("Helvetica", "bold");
   }
 
+  pdf.text(String(result), 90, y);
+  if (flag) pdf.text(flag, 110, y);
+
+  pdf.setTextColor(0);
+  pdf.setFont("Helvetica", "normal");
+  pdf.text(unit, 123, y);
+
+  // ✅ FIXED REFERENCE COLUMN
+  if (Array.isArray(ref)) {
+    let refText = ref.join(" | ");   // F:11-16 | M:14-18
+    pdf.text(refText, 160, y);
+  } else {
+    pdf.text(ref, 160, y);
+  }
+
+  y += 7;
+}
+
+
+  // ================= CBC DATA (NO ROW REMOVED) =================
   row("HAEMOGLOBIN", data.Haemoglobin, "g/dl", ["F:11-16", "M:14-18"], data.Sex);
   row("TOTAL LEUCOCYTE COUNT", data.TLC, "/cumm", ["4000-10000"], data.Sex);
 
-  pdf.text("DIFF. LEUCOCYTE COUNT", 12, y);
+  pdf.text("DIFF. LEUCOCYTE COUNT", 20, y);
   y += 6;
 
-  row("NEUTROPHILS", data.Neutrophils, "%", ["40-75"], data.Sex);
-  row("LYMPHOCYTES", data.Lymphocytes, "%", ["20-45"], data.Sex);
-  row("EOSINOPHILS", data.Eosinophils, "%", ["1-6"], data.Sex);
-  row("MONOCYTES", data.Monocytes, "%", ["2-10"], data.Sex);
-  row("BASOPHILS", data.Basophils, "%", ["0-1"], data.Sex);
+ row("NEUTROPHILS", data.Neutrophils, "%", ["40-75"], data.Sex, 10);
+row("LYMPHOCYTES", data.Lymphocytes, "%", ["20-45"], data.Sex, 10);
+row("EOSINOPHILS", data.Eosinophils, "%", ["1-6"], data.Sex, 10);
+row("MONOCYTES", data.Monocytes, "%", ["2-10"], data.Sex, 10);
+row("BASOPHILS", data.Basophils, "%", ["0-1"], data.Sex, 10);
+
 
   row("RBC", data.RBC, "million/cumm", ["F:4.1-4.7", "M:4.7-5.4"], data.Sex);
   row("HCT", data.HCT, "%", ["F:37-47", "M:40-54"], data.Sex);
@@ -134,19 +209,40 @@ function createCBCPdf(data, colored = false) {
   row("PCT", data.PCT, "%", ["0.100-0.280"], data.Sex);
   row("PDW", data.PDW, "%", ["9-17"], data.Sex);
 
-  pdf.line(10, 270, 200, 270);
-  pdf.setFontSize(9);
-  pdf.text("P.NO : 1  *** ADVANCE BLOOD CLINICAL LABORATORY ***", 15, 276);
-  pdf.text('"Thanks for Referral"', 160, 282);
+  // ---------- FOOTER ----------
+  function drawFooter() {
+    let footerY = y ;   // tight spacing under last row
 
-  if (colored) {
-    pdf.addImage("/assets/bottom.jpeg", "JPEG", 0, 287, 210, 30);
+
+    if (footerY + 45 > 297) {
+      pdf.addPage();
+      footerY = TOP_MARGIN;
+    }
+
+    pdf.line(10, footerY, 200, footerY);
+    pdf.setFontSize(11);
+
+    pdf.text(
+      "P.NO : 1 *** ADVANCE BLOOD CLINICAL LABORATORY, WADNER BHOLJI ***",
+      20,
+      footerY + 6
+    );
+
+    pdf.text('"Thanks for Referral"', 150, footerY + 12);
+
+    if (colored && bottomImgBase64) {
+  pdf.addImage(bottomImgBase64, "JPEG", 0, footerY + 18, 210, 30);
+}
+
   }
+
+  drawFooter();
 
   const suffix = colored ? "COLORED" : "NORMAL";
   pdf.save(`${data["Patient Name"]}_CBC_${suffix}.pdf`);
 }
 
+// ================= FLAG LOGIC =================
 function checkFlag(value, refList, sex) {
   const val = parseFloat(String(value).replace(/,/g, ""));
   sex = sex.toLowerCase();
