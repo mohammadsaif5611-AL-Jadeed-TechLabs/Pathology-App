@@ -173,21 +173,15 @@ const pdf = new jsPDFLib("p", "mm", "a4");
 
   // ✅ FIXED REFERENCE COLUMN
   if (Array.isArray(ref)) {
-  pdf.text(ref[0], 160, y);       // F range
-  if (ref[1]) {
-    pdf.text(ref[1], 160, y + 4); // M range niche
-  }
+  pdf.text(ref.join(" | "), 160, y);  // "F:11-16 | M:14-18"
 } else {
   pdf.text(ref, 160, y);
 }
 
 
+
  
-if (Array.isArray(ref)) {
-  y += 9;   // Female + Male (2 lines)
-} else {
-  y += 5;   // Single-line reference
-}
+y += 7; // row spacing
 
 
 }
