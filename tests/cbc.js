@@ -188,7 +188,7 @@ const pdf = new jsPDFLib("p", "mm", "a4");
 
   // ================= CBC DATA (NO ROW REMOVED) =================
   row("HAEMOGLOBIN", data.Haemoglobin, "g/dl", ["F:11-16", "M:14-18"], data.Sex);
-  y+=10
+  y+=5
   row("TOTAL LEUCOCYTE COUNT", data.TLC, "/cumm", ["4,000-10,000"], data.Sex);
 
   pdf.text("DIFF. LEUCOCYTE COUNT", 20, y);
@@ -203,9 +203,9 @@ row("BASOPHILS", data.Basophils, "%", ["0-1"], data.Sex, 10);
 
   row("RBC", data.RBC, "million/cumm", ["F:4.1-4.7", "M:4.7-5.4"], data.Sex);
 
-  y+=10
+  y+=5
   row("HCT", data.HCT, "%", ["F:37-47", "M:40-54"], data.Sex);
-  y+=10
+  y+=5
   row("MCV", data.MCV, "fl", ["76-96"], data.Sex);
   row("MCH", data.MCH, "pg", ["27-34"], data.Sex);
   row("MCHC", data.MCHC, "g/dl", ["31-36"], data.Sex);
