@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
   background: #f3f4f6;
-  padding: 20px;
+  padding: 0px;
 }
 
 h2, h3 {
@@ -36,12 +36,10 @@ input, select {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-body {
-  background: #f4f6fa;
-}
+
 
 .container {
-  padding: 20px;
+  padding: 0px;
   max-width: 420px;
   margin: auto;
 }
@@ -62,7 +60,7 @@ body {
 .btn {
     width: 100%;
     background: #ff0000;
-    padding: 12px;
+    padding: 9px;
     border-radius: 14px;
     text-decoration: none;
     color: #ffffff;
@@ -85,7 +83,7 @@ body {
 }
 /* Reusable layout */
 .container {
-    padding: 1px;
+    padding: 20px;
     max-width: 100%;
     margin: auto;
 }
@@ -128,9 +126,9 @@ label {
 
 .input {
     width: 100%;
-    padding: 12px;
+    padding: 8px;
     border-radius: 10px;
-    border: 3px solid #ff5252;
+    border: 1px solid #ff5252;
     font-size: 19px;
     font-weight: 600;
     margin-top: 5px;
