@@ -104,7 +104,7 @@ const pdf = new jsPDFLib("p", "mm", "a4");
 
   // ---------- TOP IMAGE ----------
  if (colored && topImgBase64) {
-  pdf.addImage(topImgBase64, "JPEG", 0, 0, 210, 50);
+  pdf.addImage(topImgBase64, "JPEG", 0, 0, 210, 45);
 }
 
 
@@ -113,15 +113,15 @@ const pdf = new jsPDFLib("p", "mm", "a4");
   pdf.setFontSize(11.2);
 
   pdf.text(`Patient : ${data["Patient Name"]}`, LEFT, y);
-  pdf.text(`Age/Sex : ${data.Age} / ${data.Sex}`, 140, y);
+  pdf.text(`Age/Sex : ${data.Age} Yrs. / ${data.Sex}`, 140, y);
 
   y += 8;
   pdf.text(`Reff. By : ${data["Reff. By"]}`, LEFT, y);
-  pdf.text(`Date : ${data.Date}`, 140, y);
+  pdf.text(`Date    : ${data.Date}`, 140, y);
 
   y += 8;
   pdf.text(`Sample : ${data.Sample}`, LEFT, y);
-  pdf.text(`LRN : ${data.LRN}`, 140, y);
+  pdf.text(`LRN     : ${data.LRN}`, 140, y);
 
   y += 15;
 
@@ -188,6 +188,7 @@ const pdf = new jsPDFLib("p", "mm", "a4");
 
   // ================= CBC DATA (NO ROW REMOVED) =================
   row("HAEMOGLOBIN", data.Haemoglobin, "g/dl", ["F:11-16", "M:14-18"], data.Sex);
+  y+=10
   row("TOTAL LEUCOCYTE COUNT", data.TLC, "/cumm", ["4,000-10,000"], data.Sex);
 
   pdf.text("DIFF. LEUCOCYTE COUNT", 20, y);
@@ -201,7 +202,10 @@ row("BASOPHILS", data.Basophils, "%", ["0-1"], data.Sex, 10);
 
 
   row("RBC", data.RBC, "million/cumm", ["F:4.1-4.7", "M:4.7-5.4"], data.Sex);
+
+  y+=10
   row("HCT", data.HCT, "%", ["F:37-47", "M:40-54"], data.Sex);
+  y+=10
   row("MCV", data.MCV, "fl", ["76-96"], data.Sex);
   row("MCH", data.MCH, "pg", ["27-34"], data.Sex);
   row("MCHC", data.MCHC, "g/dl", ["31-36"], data.Sex);
