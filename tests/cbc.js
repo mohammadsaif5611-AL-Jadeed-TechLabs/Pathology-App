@@ -182,8 +182,7 @@ const pdf = new jsPDFLib("p", "mm", "a4");
 }
 
 
-y += Array.isArray(ref) ? 10 : 7;
-
+  y += 7;
 }
 
 
