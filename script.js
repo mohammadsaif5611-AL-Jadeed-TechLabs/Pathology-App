@@ -34,3 +34,10 @@ function autoSelectGender() {
     sexSelect.value = "Female";
   }
 }
+// ===============================
+// FORCE UPPERCASE INPUT
+// ===============================
+function toUpperCaseInput(el) {
+  if (!el) return;
+  el.value = el.value.toUpperCase();
+}
