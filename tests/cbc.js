@@ -133,7 +133,7 @@ if (colored && bgImgBase64) {
 
   // ---------- TOP IMAGE ----------
  if (colored && topImgBase64) {
-  pdf.addImage(topImgBase64, "JPEG", 0, 0, 210, 45);
+  pdf.addImage(topImgBase64, "JPEG", 0, 0, 210, 50);
 }
 
 
