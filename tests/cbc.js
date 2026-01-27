@@ -16,33 +16,33 @@ function loadImages() {
   return Promise.all([
     loadImageToBase64("../assets/top.jpeg").then(b64 => topImgBase64 = b64),
     loadImageToBase64("../assets/bottom.jpeg").then(b64 => bottomImgBase64 = b64),
-    loadImageToBase64("../assets/BG.png").then(b64 => bgImgBase64 = b64)
+    loadImageToBase64("../assets/BG.jpg", "jpeg").then(b64 => bgImgBase64 = b64)
   ]);
 }
+
 
 
 
 function loadImageToBase64(path, format = "png") {
   return new Promise((resolve, reject) => {
     const img = new Image();
-    img.crossOrigin = "anonymous";
     img.onload = function () {
       const canvas = document.createElement("canvas");
       canvas.width = img.width;
       canvas.height = img.height;
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0);
+      canvas.getContext("2d").drawImage(img, 0, 0);
 
-      if (format === "jpeg") {
-        resolve(canvas.toDataURL("image/jpeg"));
-      } else {
-        resolve(canvas.toDataURL("image/png"));
-      }
+      resolve(
+        format === "jpeg"
+          ? canvas.toDataURL("image/jpeg")
+          : canvas.toDataURL("image/png")
+      );
     };
     img.onerror = reject;
     img.src = path;
   });
 }
+
 
 window.onload = async () => {
   await loadImages();
@@ -53,10 +53,11 @@ window.onload = async () => {
 // ================= GENERATE PDF =================
 function generatePDF() {
 
-  if (!topImgBase64 || !bottomImgBase64) {
-    alert("Images still loading, please wait 1 second...");
-    return;
-  }
+ 
+if (!topImgBase64 || !bottomImgBase64 || !bgImgBase64) {
+  alert("Images still loading, please wait 1 second...");
+  return;
+}
 
 const jsPDFLib =
   window.jspdf?.jsPDF || window.jsPDF;
@@ -113,11 +114,12 @@ const pdf = new jsPDFLib("p", "mm", "a4");
 
 // ---------- BACKGROUND IMAGE ----------
 if (bgImgBase64) {
+  const bgW = 150;
+  const bgX = (210 - bgW) / 2; // exact center
 
   pdf.setGState(new pdf.GState({ opacity: 0.05 }));
-pdf.addImage(bgImgBase64, "PNG", 30, 80, 150, 150);
-pdf.setGState(new pdf.GState({ opacity: 1 }));
-
+  pdf.addImage(bgImgBase64, "JPEG", bgX, 80, bgW, bgW);
+  pdf.setGState(new pdf.GState({ opacity: 1 }));
 }
 
 
@@ -170,16 +172,20 @@ pdf.setGState(new pdf.GState({ opacity: 1 }));
     pdf.addPage();
 
     // BACKGROUND AGAIN
-    if (bgImgBase64) {
-     
+   if (bgImgBase64) {
+  const bgW = 150;
+  const bgX = (210 - bgW) / 2; // exact center
+
   pdf.setGState(new pdf.GState({ opacity: 0.05 }));
-pdf.addImage(bgImgBase64, "PNG", 30, 80, 150, 150);
-pdf.setGState(new pdf.GState({ opacity: 1 }));
-    }
+  pdf.addImage(bgImgBase64, "JPEG", bgX, 80, bgW, bgW);
+  pdf.setGState(new pdf.GState({ opacity: 1 }));
+}
 
     y = TOP_MARGIN;
   }
 }
+
+// ---------- BACKGROUND IMAGE ----------
 
 
   // ---------- ROW FUNCTION ----------
