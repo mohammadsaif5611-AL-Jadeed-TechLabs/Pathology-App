@@ -5,6 +5,7 @@ const RIGHT = 195;
 const FOOTER_GAP = 0;
 const PAGE_BOTTOM = 270;
 
+let bgImgBase64 = null;
 
 let topImgBase64 = null;
 let bottomImgBase64 = null;
@@ -12,9 +13,12 @@ let bottomImgBase64 = null;
 function loadImages() {
   return Promise.all([
     loadImageToBase64("../assets/top.jpeg").then(b64 => topImgBase64 = b64),
-    loadImageToBase64("../assets/bottom.jpeg").then(b64 => bottomImgBase64 = b64)
+    loadImageToBase64("../assets/bottom.jpeg").then(b64 => bottomImgBase64 = b64),
+    loadImageToBase64("../assets/BG.png").then(b64 => bgImgBase64 = b64)
   ]);
 }
+
+
 
 function loadImageToBase64(path) {
   return new Promise((resolve, reject) => {
@@ -99,6 +103,16 @@ const jsPDFLib =
 
 const pdf = new jsPDFLib("p", "mm", "a4");
 
+// ---------- BACKGROUND IMAGE ----------
+if (bgImgBase64) {
+
+  pdf.setGState(new pdf.GState({ opacity: 0.05 }));
+pdf.addImage(bgImgBase64, "PNG", 30, 80, 150, 150);
+pdf.setGState(new pdf.GState({ opacity: 1 }));
+
+}
+
+
 
   let y = TOP_MARGIN;
 
@@ -141,12 +155,24 @@ const pdf = new jsPDFLib("p", "mm", "a4");
   y += 10;
 
   // ---------- PAGE BREAK ----------
+ 
+
   function nextPageCheck() {
-    if (y > PAGE_BOTTOM) {
-      pdf.addPage();
-      y = TOP_MARGIN;
+  if (y > PAGE_BOTTOM) {
+    pdf.addPage();
+
+    // BACKGROUND AGAIN
+    if (bgImgBase64) {
+     
+  pdf.setGState(new pdf.GState({ opacity: 0.05 }));
+pdf.addImage(bgImgBase64, "PNG", 30, 80, 150, 150);
+pdf.setGState(new pdf.GState({ opacity: 1 }));
     }
+
+    y = TOP_MARGIN;
   }
+}
+
 
   // ---------- ROW FUNCTION ----------
  function row(name, result, unit, ref, sex, indent = 0) {
