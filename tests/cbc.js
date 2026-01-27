@@ -28,6 +28,12 @@ function loadImages() {
   ]);
 }
 
+function formatDateDDMMYY(dateStr) {
+  if (!dateStr) return "";
+
+  const [year, month, day] = dateStr.split("-");
+  return `${day}/${month}/${year}`;
+}
 
 
 
@@ -86,7 +92,8 @@ if (!jsPDFLib) {
     "Sample": sample.value,
     "Age": age.value,
     "Sex": sex.value,
-    "Date": date.value,
+    "Date": formatDateDDMMYY(date.value),
+
     "LRN": lrn.value,
 
     "Haemoglobin": Haemoglobin.value,
@@ -176,7 +183,7 @@ pdf.text("Sample", L_LABEL, y);
 pdf.text(":", L_COLON, y);
 pdf.text(data.Sample, L_VALUE, y);
 
-pdf.text("LRN.", R_LABEL, y);
+pdf.text("LRN..", R_LABEL, y);
 pdf.text(":", R_COLON, y);
 pdf.text(data.LRN, R_VALUE, y);
 
