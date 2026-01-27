@@ -25,15 +25,14 @@
   class="input"
   id="patient_name"
   value="MRS. SAFIYA ANJUM"
-  oninput="autoSelectGender()"
-/>
+   oninput="toUpperCaseInput(this); autoSelectGender();" />
 
 
       <label>Referred By</label>
-      <input class="input" id="ref_by" value="DR. MUJAHID KHAN SIR" />
+      <input class="input" id="ref_by" value="DR. MUJAHID KHAN SIR"  oninput="toUpperCaseInput(this)" />
 
       <label>Sample</label>
-      <input class="input" id="sample" value="RECEIVED FROM OUTSIDE" />
+      <input class="input" id="sample" value="RECEIVED FROM OUTSIDE"  oninput="toUpperCaseInput(this)" />
 
       <div class="row">
         <div style="width: 50%;">
@@ -144,6 +143,13 @@
   </div>
 
   <!-- INPUT FILTER SCRIPT -->
+<script>
+  // Auto set current date
+  document.addEventListener("DOMContentLoaded", () => {
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("date").value = today;
+  });
+</script>
 
 
 
