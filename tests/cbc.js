@@ -114,13 +114,15 @@ const pdf = new jsPDFLib("p", "mm", "a4");
 
 // ---------- BACKGROUND IMAGE ----------
 if (bgImgBase64) {
-  const bgW = 150;
-  const bgX = (210 - bgW) / 2; // exact center
+  const bgWidth = 150;
+  const bgHeight = 120;   // 👈 height kam
+  const bgX = (210 - bgWidth) / 2;
 
-  pdf.setGState(new pdf.GState({ opacity: 0.05 }));
-  pdf.addImage(bgImgBase64, "JPEG", bgX, 80, bgW, bgW);
+  pdf.setGState(new pdf.GState({ opacity: 0.18 })); // 👈 clear visibility
+  pdf.addImage(bgImgBase64, "JPEG", bgX, 85, bgWidth, bgHeight);
   pdf.setGState(new pdf.GState({ opacity: 1 }));
 }
+
 
 
 
@@ -172,14 +174,16 @@ if (bgImgBase64) {
     pdf.addPage();
 
     // BACKGROUND AGAIN
-   if (bgImgBase64) {
-  const bgW = 150;
-  const bgX = (210 - bgW) / 2; // exact center
+  if (bgImgBase64) {
+  const bgWidth = 150;
+  const bgHeight = 120;   // 👈 height kam
+  const bgX = (210 - bgWidth) / 2;
 
-  pdf.setGState(new pdf.GState({ opacity: 0.05 }));
-  pdf.addImage(bgImgBase64, "JPEG", bgX, 80, bgW, bgW);
+  pdf.setGState(new pdf.GState({ opacity: 0.12 })); // 👈 clear visibility
+  pdf.addImage(bgImgBase64, "JPEG", bgX, 85, bgWidth, bgHeight);
   pdf.setGState(new pdf.GState({ opacity: 1 }));
 }
+
 
     y = TOP_MARGIN;
   }
