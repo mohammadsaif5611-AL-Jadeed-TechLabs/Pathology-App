@@ -113,15 +113,18 @@ const jsPDFLib =
 const pdf = new jsPDFLib("p", "mm", "a4");
 
 // ---------- BACKGROUND IMAGE ----------
-if (bgImgBase64) {
+// ---------- BACKGROUND IMAGE (ONLY COLORED) ----------
+if (colored && bgImgBase64) {
   const bgWidth = 150;
-  const bgHeight = 120;   // 👈 height kam
+  const bgHeight = 120;
   const bgX = (210 - bgWidth) / 2;
+  const bgY = 95; // 👈 thoda niche
 
-  pdf.setGState(new pdf.GState({ opacity: 0.18 })); // 👈 clear visibility
-  pdf.addImage(bgImgBase64, "JPEG", bgX, 85, bgWidth, bgHeight);
+  pdf.setGState(new pdf.GState({ opacity: 0.18 }));
+  pdf.addImage(bgImgBase64, "JPEG", bgX, bgY, bgWidth, bgHeight);
   pdf.setGState(new pdf.GState({ opacity: 1 }));
 }
+
 
 
 
@@ -174,15 +177,18 @@ if (bgImgBase64) {
     pdf.addPage();
 
     // BACKGROUND AGAIN
-  if (bgImgBase64) {
+// ---------- BACKGROUND IMAGE (ONLY COLORED) ----------
+if (colored && bgImgBase64) {
   const bgWidth = 150;
-  const bgHeight = 120;   // 👈 height kam
+  const bgHeight = 120;
   const bgX = (210 - bgWidth) / 2;
+  const bgY = 95; // 👈 thoda niche
 
-  pdf.setGState(new pdf.GState({ opacity: 0.12 })); // 👈 clear visibility
-  pdf.addImage(bgImgBase64, "JPEG", bgX, 85, bgWidth, bgHeight);
+  pdf.setGState(new pdf.GState({ opacity: 0.18 }));
+  pdf.addImage(bgImgBase64, "JPEG", bgX, bgY, bgWidth, bgHeight);
   pdf.setGState(new pdf.GState({ opacity: 1 }));
 }
+
 
 
     y = TOP_MARGIN;
