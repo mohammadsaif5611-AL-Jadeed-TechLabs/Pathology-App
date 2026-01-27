@@ -5,6 +5,8 @@ const RIGHT = 195;
 const FOOTER_GAP = 0;
 const PAGE_BOTTOM = 270;
 
+
+
 let bgImgBase64 = null;
 
 let topImgBase64 = null;
@@ -20,7 +22,7 @@ function loadImages() {
 
 
 
-function loadImageToBase64(path) {
+function loadImageToBase64(path, format = "png") {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.crossOrigin = "anonymous";
@@ -30,12 +32,18 @@ function loadImageToBase64(path) {
       canvas.height = img.height;
       const ctx = canvas.getContext("2d");
       ctx.drawImage(img, 0, 0);
-      resolve(canvas.toDataURL("image/jpeg"));
+
+      if (format === "jpeg") {
+        resolve(canvas.toDataURL("image/jpeg"));
+      } else {
+        resolve(canvas.toDataURL("image/png"));
+      }
     };
     img.onerror = reject;
     img.src = path;
   });
 }
+
 window.onload = async () => {
   await loadImages();
   console.log("Images loaded");
