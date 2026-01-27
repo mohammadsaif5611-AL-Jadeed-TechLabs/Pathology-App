@@ -6,12 +6,12 @@ const FOOTER_GAP = 0;
 const PAGE_BOTTOM = 270;
 
 const L_LABEL = 20;   // Patient / Reff.By / Sample
-const L_COLON = 55;  // : (left side)
-const L_VALUE = 60;  // value start
+const L_COLON = 33;  // : (left side)
+const L_VALUE = 36;  // value start
 
-const R_LABEL = 130; // Age/Sex / Date / LRN
-const R_COLON = 165; // :
-const R_VALUE = 170;
+const R_LABEL = 145; // Age/Sex / Date / LRN
+const R_COLON = 160; // :
+const R_VALUE = 163;
 
 
 
@@ -193,8 +193,8 @@ y += 15;
   pdf.rect(10, y - 6, 190, 8);
   pdf.text("INVESTIGATION", 20, y);
   pdf.text("RESULT", 90, y);
-  pdf.text("UNIT", 123, y);
-  pdf.text("REFERENCE", 155, y);
+  pdf.text("UNIT", 120, y);
+  pdf.text("REFERENCE RANGE", 147, y);
 
   y += 10;
 
@@ -248,13 +248,13 @@ if (colored && bgImgBase64) {
 
   pdf.setTextColor(0);
   pdf.setFont("Helvetica", "normal");
-  pdf.text(unit, 123, y);
+  pdf.text(unit, 120, y);
 
   // ✅ FIXED REFERENCE COLUMN
   if (Array.isArray(ref)) {
-  pdf.text(ref.join(" | "), 155, y);  // "F:11-16 | M:14-18"
+  pdf.text(ref.join(" | "), 147, y);  // "F:11-16 | M:14-18"
 } else {
-  pdf.text(ref, 155, y);
+  pdf.text(ref, 147, y);
 }
 
 
