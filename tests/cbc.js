@@ -5,6 +5,14 @@ const RIGHT = 195;
 const FOOTER_GAP = 0;
 const PAGE_BOTTOM = 270;
 
+const L_LABEL = 20;   // Patient / Reff.By / Sample
+const L_COLON = 55;  // : (left side)
+const L_VALUE = 60;  // value start
+
+const R_LABEL = 130; // Age/Sex / Date / LRN
+const R_COLON = 165; // :
+const R_VALUE = 170;
+
 
 
 let bgImgBase64 = null;
@@ -138,21 +146,42 @@ if (colored && bgImgBase64) {
 
 
   // ---------- PATIENT DETAILS ----------
-  pdf.setFont("Helvetica", "bold");
-  pdf.setFontSize(11.2);
+pdf.setFont("Helvetica", "bold");
+pdf.setFontSize(11.2);
 
-  pdf.text(`Patient : ${data["Patient Name"]}`, LEFT, y);
-  pdf.text(`Age/Sex : ${data.Age} Yrs. / ${data.Sex}`, 140, y);
+// -------- ROW 1 --------
+pdf.text("Patient", L_LABEL, y);
+pdf.text(":", L_COLON, y);
+pdf.text(data["Patient Name"], L_VALUE, y);
 
-  y += 8;
-  pdf.text(`Reff. By : ${data["Reff. By"]}`, LEFT, y);
-  pdf.text(`Date    : ${data.Date}`, 140, y);
+pdf.text("Age/Sex", R_LABEL, y);
+pdf.text(":", R_COLON, y);
+pdf.text(`${data.Age} Yrs. / ${data.Sex}`, R_VALUE, y);
 
-  y += 8;
-  pdf.text(`Sample : ${data.Sample}`, LEFT, y);
-  pdf.text(`LRN     : ${data.LRN}`, 140, y);
+y += 7;
 
-  y += 15;
+// -------- ROW 2 --------
+pdf.text("Reff. By", L_LABEL, y);
+pdf.text(":", L_COLON, y);
+pdf.text(data["Reff. By"], L_VALUE, y);
+
+pdf.text("Date", R_LABEL, y);
+pdf.text(":", R_COLON, y);
+pdf.text(data.Date, R_VALUE, y);
+
+y += 7;
+
+// -------- ROW 3 --------
+pdf.text("Sample", L_LABEL, y);
+pdf.text(":", L_COLON, y);
+pdf.text(data.Sample, L_VALUE, y);
+
+pdf.text("LRN.", R_LABEL, y);
+pdf.text(":", R_COLON, y);
+pdf.text(data.LRN, R_VALUE, y);
+
+y += 15;
+
 
   // ---------- HEADING ----------
   pdf.setFontSize(13.2);
@@ -238,7 +267,7 @@ y += 7; // row spacing
 
 
   // ================= CBC DATA (NO ROW REMOVED) =================
-  row("HAEMOGLOBIN", data.Haemoglobin, "g/dl", ["F: 11-16", "M: 14-18"], data.Sex);
+  row("HAEMOGLOBIN", data.Haemoglobin, "gm %", ["F: 11-16", "M: 14-18"], data.Sex);
   
   row("TOTAL LEUCOCYTE COUNT", data.TLC, "/cumm", ["4,000 - 10,000"], data.Sex);
 
@@ -264,7 +293,7 @@ row("BASOPHILS", data.Basophils, "%", ["0 - 1"], data.Sex, 10);
   row("RDW-SD", data.RDW_SD, "fl", ["39 - 46"], data.Sex);
   row("PLATELET COUNT", data.Platelet, "/cumm", ["1,50,000 - 4,50,000"], data.Sex);
   row("MPV", data.MPV, "fl", ["6.5 - 11"], data.Sex);
-  row("PCT", data.PCT, "%", ["0.100 - 0.280"], data.Sex);
+  row("PCT", data.PCT, " ", ["0.100 - 0.280"], data.Sex);
   row("PDW", data.PDW, "%", ["9.0 - 17.0"], data.Sex);
 
   // ---------- FOOTER ----------
