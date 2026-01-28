@@ -276,7 +276,9 @@ y += 7; // row spacing
   // ================= CBC DATA (NO ROW REMOVED) =================
   row("HAEMOGLOBIN", data.Haemoglobin, "gm %", ["F: 11-16", "M: 14-18"], data.Sex);
   
-  row("TOTAL LEUCOCYTE COUNT", data.TLC, "/cumm", ["4000-10000"], data.Sex);
+  row("TOTAL LEUCOCYTE COUNT", data.TLC, "/cumm", [formatRangeDisplay("4000-10000")], data.Sex);
+
+
 
   pdf.text("DIFF. LEUCOCYTE COUNT", 20, y);
   y += 6;
@@ -299,7 +301,7 @@ row("BASOPHILS", data.Basophils, "%", ["0 - 1"], data.Sex, 10);
   row("RDW-CV", data.RDW_CV, "%", ["10 - 15"], data.Sex);
   row("RDW-SD", data.RDW_SD, "fl", ["39 - 46"], data.Sex);
 
-row("PLATELET COUNT", data.Platelet, "/cumm", ["150000-450000"], data.Sex);
+row("PLATELET COUNT", data.Platelet, "/cumm", [formatRangeDisplay("150000-450000")], data.Sex);
 
   row("MPV", data.MPV, "fl", ["6.5 - 11"], data.Sex);
   row("PCT", data.PCT, " ", ["0.100 - 0.280"], data.Sex);
