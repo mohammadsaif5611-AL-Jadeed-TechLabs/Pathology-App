@@ -364,7 +364,9 @@ function checkFlag(value, refList, sex) {
 }
 
 function compare(val, range) {
-  const [low, high] = range.split("-").map(Number);
+  const clean = range.replace(/,/g, "");
+  const [low, high] = clean.split("-").map(Number);
+
   if (val < low) return { flag: "L", abnormal: true };
   if (val > high) return { flag: "H", abnormal: true };
   return { flag: "", abnormal: false };
