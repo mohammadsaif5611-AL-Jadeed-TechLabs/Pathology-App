@@ -95,6 +95,15 @@ function generatePDF() {
   createUrinePdf(data, true);
 }
 
+function isDefaultSelected(selectId) {
+  const sel = document.getElementById(selectId);
+  if (!sel) return true;
+
+  const firstValue = sel.options[0].value;
+  return sel.value === firstValue;
+}
+
+
 // ================= CREATE PDF =================
 function createUrinePdf(data, colored = false) {
   const { jsPDF } = window.jspdf;
@@ -151,7 +160,7 @@ function createUrinePdf(data, colored = false) {
 
   pdf.rect(10, y - 6, 190, 8);
   pdf.text("INVESTIGATION", 20, y);
-  pdf.text("RESULT", 140, y);
+  pdf.text("RESULT", 80, y);
   y += 10;
 
   // ================= ROW FUNCTION =================
@@ -159,14 +168,14 @@ function createUrinePdf(data, colored = false) {
     pdf.setFont("Helvetica", "normal");
     pdf.setTextColor(0);
     pdf.text(label, 20, y);
-    pdf.text(":", 130, y);
+    pdf.text(":", 80, y);
 
     if (isManual) {
       pdf.setFont("Helvetica", "bold");
       pdf.setTextColor(255, 0, 0);
     }
 
-    pdf.text(value || "-", 135, y);
+    pdf.text(value || "-", 85, y);
     pdf.setTextColor(0);
     y += 7;
   }
@@ -178,35 +187,42 @@ function createUrinePdf(data, colored = false) {
 
 // FIXED ROWS (hard-coded)
 row("QUANTITY", "10 ML");
-row("COLOUR", data.Colour || "Pale Yellow");
+row("COLOUR", data.Colour, !isDefaultSelected("Colour"));
 row("NATURE", "Random");
-row("APPEARANCE", data.Appearance || "Clear");
+row("APPEARANCE", data.Appearance, !isDefaultSelected("Appearance"));
 row("REACTION", "Acidic");
 
 
-  y += 6;
+
+  y += 4;
   pdf.setFont("Helvetica", "bold");
   pdf.text("CHEMICAL EXAMINATION", 20, y);
   y += 7;
 
-  row("ALBUMIN", data.Albumin);
-  row("SUGAR", data.Sugar);
-  row("BILE SALT", data.Bsalt);
-  row("BILE PIGMENT", data.Bpigment, Bpigment.value === "OTHER");
+row("ALBUMIN", data.Albumin, !isDefaultSelected("Albumin"));
+row("SUGAR", data.Sugar, !isDefaultSelected("Sugar"));
+row("BILE SALT", data.Bsalt, !isDefaultSelected("Bsalt"));
+row(
+  "BILE PIGMENT",
+  data.Bpigment,
+  !isDefaultSelected("Bpigment")
+);
 
-  y += 6;
+
+  y += 4;
   pdf.setFont("Helvetica", "bold");
   pdf.text("MICROSCOPIC EXAMINATION", 20, y);
   y += 7;
 
-  row("R.B.C.", data.RBC);
-  row("PUS CELLS", data.Puscells);
-  row("EPITHELIAL CELLS", data.Epithelialcells);
-  row("AMORPHOUS MATERIAL", data.Amorphousmaterial);
-  row("BACTERIA", data.Bacterial);
-  row("CAST", data.Cast);
-  row("CRYSTALS", data.Crystals);
-  row("OTHER FINDINGS", data.Other);
+row("R.B.C.", data.RBC, !isDefaultSelected("RBC"));
+row("PUS CELLS", data.Puscells, !isDefaultSelected("Puscells"));
+row("EPITHELIAL CELLS", data.Epithelialcells, !isDefaultSelected("Epithelialcells"));
+row("AMORPHOUS MATERIAL", data.Amorphousmaterial, !isDefaultSelected("Amorphousmaterial"));
+row("BACTERIA", data.Bacterial, !isDefaultSelected("Bacterial"));
+row("CAST", data.Cast, !isDefaultSelected("Cast"));
+row("CRYSTALS", data.Crystals, !isDefaultSelected("Crystals"));
+row("OTHER FINDINGS", data.Other, !isDefaultSelected("Other"));
+
 
 
 
