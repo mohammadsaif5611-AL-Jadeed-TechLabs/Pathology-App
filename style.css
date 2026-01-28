@@ -147,6 +147,16 @@ label {
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 }
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 14px;
+}
+
+/* 👇 other input full width lega */
+.grid .full-row {
+  grid-column: 1 / -1;
+}
 
 /* Primary button */
 .primary-btn {
