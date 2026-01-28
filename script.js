@@ -12,6 +12,43 @@ function onlyNumberCommaDot(el) {
 }
 
 
+// only number and comma in input dot not allowed
+//oninput="onlyNumberComma(this)"
+function onlyNumberComma(input) {
+  let value = input.value;
+
+  // allow only digits and comma
+  value = value.replace(/[^0-9,]/g, "");
+
+  // allow only ONE comma
+  const parts = value.split(",");
+  if (parts.length > 2) {
+    value = parts[0] + "," + parts.slice(1).join("");
+  }
+
+  input.value = value;
+}
+
+// only number and dot in input comma not allowed
+//oninput="onlyNumberDot(this)"
+
+
+function onlyNumberDot(input) {
+  let value = input.value;
+
+  // remove everything except digits and dot
+  value = value.replace(/[^0-9.]/g, "");
+
+  // allow only ONE dot
+  const parts = value.split(".");
+  if (parts.length > 2) {
+    value = parts[0] + "." + parts.slice(1).join("");
+  }
+
+  input.value = value;
+}
+
+
 // ===============================
 // AUTO GENDER SELECT FROM NAME
 // ===============================
@@ -41,3 +78,14 @@ function toUpperCaseInput(el) {
   if (!el) return;
   el.value = el.value.toUpperCase();
 }
+
+function formatWithCommas(input) {
+  let value = input.value.replace(/,/g, "");
+  if (value === "") return;
+
+  if (!isNaN(value)) {
+    input.value = Number(value).toLocaleString("en-IN");
+  }
+}
+
+
