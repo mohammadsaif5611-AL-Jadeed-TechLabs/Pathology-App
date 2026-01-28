@@ -17,6 +17,58 @@
     <h2 class="title">URINE ANALYSIS REPORT</h2>
 
     <!-- Patient Info -->
+    <div class="card">
+      <h3 class="card-title">Patient Information</h3>
+
+      <label>Patient Name</label>
+      <input
+  class="input"
+  id="patient_name"
+  value="MRS. SAFIYA ANJUM"
+   oninput="toUpperCaseInput(this); autoSelectGender();" />
+
+
+      <label>Referred By</label>
+      <input class="input" id="ref_by" value="DR. MUJAHID KHAN SIR"  oninput="toUpperCaseInput(this)" />
+
+      <label>Sample</label>
+      <input class="input" id="sample" value="RECEIVED FROM OUTSIDE"  oninput="toUpperCaseInput(this)" />
+
+      <div class="row">
+        <div style="width: 50%;">
+          <label>Age</label>
+          <input
+            class="input"
+            id="age"
+            inputmode="numeric"
+            oninput="onlyNumberCommaDot(this)"
+            value="22"
+          />
+        </div>
+
+        <div style="width: 50%;">
+          <label>Sex</label>
+          <select class="input" id="sex">
+            <option>Male</option>
+            <option selected>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Date</label>
+      <input class="input" id="date" type="date" />
+
+      <label>LRN</label>
+      <input
+        class="input"
+        id="lrn"
+        inputmode="numeric"
+        oninput="onlyNumberCommaDot(this)"
+        value="0590"
+      />
+    </div>
+
    <div class="card">
   <h3 class="card-title">PHYSICAL EXAMINATION</h3>
   <div class="grid">
