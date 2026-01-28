@@ -114,19 +114,7 @@ function formatRangeDisplay(range) {
 //   [formatRangeDisplay("4000-10000")],
 //   data.Sex
 // );
-function toggleOther(select) {
-  const otherInput = document.getElementById(select.id + "_other");
-  if (!otherInput) return;
 
-  if (select.value === "OTHER") {
-    otherInput.style.display = "block";
-    otherInput.required = true;
-  } else {
-    otherInput.style.display = "none";
-    otherInput.value = "";
-    otherInput.required = false;
-  }
-}
 
 
 
