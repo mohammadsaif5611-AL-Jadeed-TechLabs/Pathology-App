@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URINE ANALYSIS REPORT</title>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="../script.js"></script>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <h2 class="title">URINE ANALYSIS REPORT</h2>
+
+    <!-- Patient Info -->
+    <div class="card">
+      <h3 class="card-title">Patient Information</h3>
+
+      <label>Patient Name</label>
+      <input
+  class="input"
+  id="patient_name"
+  value="MRS. SAFIYA ANJUM"
+   oninput="toUpperCaseInput(this); autoSelectGender();" />
+
+
+      <label>Referred By</label>
+      <input class="input" id="ref_by" value="DR. MUJAHID KHAN SIR"  oninput="toUpperCaseInput(this)" />
+
+      <label>Sample</label>
+      <input class="input" id="sample" value="RECEIVED FROM OUTSIDE"  oninput="toUpperCaseInput(this)" />
+
+      <div class="row">
+        <div style="width: 50%;">
+          <label>Age</label>
+          <input
+            class="input"
+            id="age"
+            inputmode="numeric"
+            oninput="onlyNumberCommaDot(this)"
+            value="22"
+          />
+        </div>
+
+        <div style="width: 50%;">
+          <label>Sex</label>
+          <select class="input" id="sex">
+            <option>Male</option>
+            <option selected>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Date</label>
+      <input class="input" id="date" type="date" />
+
+      <label>LRN</label>
+      <input
+        class="input"
+        id="lrn"
+        inputmode="numeric"
+        oninput="onlyNumberCommaDot(this)"
+        value="0590"
+      />
+    </div>
+
+    <!-- CBC Values -->
+    <div class="card">
+      <h3 class="card-title">PHYSICAL EXAMINATION</h3>
+
+     <div class="grid">
+
+  <!-- LEFT COLUMN -->
+  <label>COLOUR</label>
+  <input class="input" placeholder="Haemoglobin" id="Haemoglobin" inputmode="decimal" oninput="onlyNumberDot(this)"
+ value="9.7" />
+
+
+
+  <label>APPEARANCE</label>
+  <input class="input" placeholder="Neutrophils" id="Neutrophils" inputmode="numeric" oninput="onlyNumberDot(this)"
+ value="75" />
+
+
+</div>
+
+    </div>
+    <!-- CBC Values -->
+    <div class="card">
+      <h3 class="card-title">CHEMICAL EXAMINATION</h3>
+
+     <div class="grid">
+
+  <!-- LEFT COLUMN -->
+  <label>COLOUR</label>
+  <input class="input" placeholder="Haemoglobin" id="Haemoglobin" inputmode="decimal" oninput="onlyNumberDot(this)"
+ value="9.7" />
+
+
+
+  <label>APPEARANCE</label>
+  <input class="input" placeholder="Neutrophils" id="Neutrophils" inputmode="numeric" oninput="onlyNumberDot(this)"
+ value="75" />
+
+
+</div>
+
+    </div>
+
+    <button class="btn" onclick="generatePDF()">
+      Generate PDF
+    </button>
+
+  </div>
+
+  <!-- INPUT FILTER SCRIPT -->
+<script>
+  // Auto set current date
+  document.addEventListener("DOMContentLoaded", () => {
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("date").value = today;
+  });
+</script>
+
+
+
+  <script src="cbc.js"></script>
+</body>
+</html>
