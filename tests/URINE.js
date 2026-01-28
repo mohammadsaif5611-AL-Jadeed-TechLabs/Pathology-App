@@ -176,8 +176,13 @@ function createUrinePdf(data, colored = false) {
   pdf.text("PHYSICAL EXAMINATION", 20, y);
   y += 7;
 
-  row("COLOUR", data.Colour);
-  row("APPEARANCE", data.Appearance);
+// FIXED ROWS (hard-coded)
+row("QUANTITY", "10 ML");
+row("COLOUR", data.Colour || "Pale Yellow");
+row("NATURE", "Random");
+row("APPEARANCE", data.Appearance || "Clear");
+row("REACTION", "Acidic");
+
 
   y += 6;
   pdf.setFont("Helvetica", "bold");
@@ -203,6 +208,70 @@ function createUrinePdf(data, colored = false) {
   row("CRYSTALS", data.Crystals);
   row("OTHER FINDINGS", data.Other);
 
-  const suffix = colored ? "COLORED" : "NORMAL";
+
+
+  // ---------- FOOTER ----------
+function drawFooter() {
+  const footerY = 250; // A4 safe footer position
+
+  pdf.line(10, footerY, 200, footerY);
+  pdf.setFontSize(11);
+
+  pdf.text(
+    "P.NO : 1 *** ADVANCE BLOOD CLINICAL LABORATORY, WADNER BHOLJI ***",
+    20,
+    footerY + 6
+  );
+
+  pdf.text('"Thanks for Referral"', 150, footerY + 12);
+
+  // BOTTOM IMAGE (FIXED AT PAGE END)
+  if (colored && bottomImgBase64) {
+    const imgHeight = 30;
+    pdf.addImage(
+      bottomImgBase64,
+      "JPEG",
+      0,
+      297 - imgHeight,
+      210,
+      imgHeight
+    );
+  }
+}
+
+
+  drawFooter();
+
+   const suffix = colored ? "COLORED" : "NORMAL";
   pdf.save(`${data.patient}_URINE_${suffix}.pdf`);
+}
+
+// ================= FLAG LOGIC =================
+function checkFlag(value, refList, sex) {
+  const val = parseFloat(String(value).replace(/,/g, ""));
+  sex = sex.toLowerCase();
+
+  for (let ref of refList) {
+    if (ref.includes(":")) {
+      const [prefix, range] = ref.split(":");
+      if (
+        (prefix.toLowerCase() === "f" && sex.startsWith("f")) ||
+        (prefix.toLowerCase() === "m" && sex.startsWith("m"))
+      ) {
+        return compare(val, range);
+      }
+    } else {
+      return compare(val, ref);
+    }
+  }
+  return { flag: "", abnormal: false };
+}
+
+function compare(val, range) {
+  const clean = range.replace(/,/g, "");
+  const [low, high] = clean.split("-").map(Number);
+
+  if (val < low) return { flag: "L", abnormal: true };
+  if (val > high) return { flag: "H", abnormal: true };
+  return { flag: "", abnormal: false };
 }
