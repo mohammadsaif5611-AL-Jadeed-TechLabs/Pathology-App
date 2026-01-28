@@ -53,55 +53,52 @@ function formatDateDDMMYY(d) {
   return `${day}/${m}/${y}`;
 }
 
-function toggleBileOther(sel) {
-  const other = document.getElementById("Bpigment_other");
-  other.style.display = sel.value === "OTHER" ? "block" : "none";
-  if (sel.value !== "OTHER") other.value = "";
-}
+
 
 // ================= GENERATE PDF =================
 function generatePDF() {
-  const data = {
-    patient: patient_name.value,
-    refBy: ref_by.value,
-    sample: sample.value,
-    age: age.value,
-    sex: sex.value,
-    date: formatDateDDMMYY(date.value),
-    lrn: lrn.value,
+ const data = {
+  patient: patient_name.value,
+  refBy: ref_by.value,
+  sample: sample.value,
+  age: age.value,
+  sex: sex.value,
+  date: formatDateDDMMYY(date.value),
+  lrn: lrn.value,
 
-    Colour: Colour.value,
-    Appearance: Appearance.value,
+  Colour: getSelectValue("Colour"),
+  Appearance: getSelectValue("Appearance"),
 
-    Albumin: Albumin.value,
-    Sugar: Sugar.value,
-    Bsalt: Bsalt.value,
-    Bpigment:
-      Bpigment.value === "OTHER"
-        ? Bpigment_other.value
-        : Bpigment.value,
+  Albumin: getSelectValue("Albumin"),
+  Sugar: getSelectValue("Sugar"),
+  Bsalt: getSelectValue("Bsalt"),
+  Bpigment: getSelectValue("Bpigment"),
 
-    RBC: RBC.value,
-    Puscells: Puscells.value,
-    Epithelialcells: Epithelialcells.value,
-    Amorphousmaterial: Amorphousmaterial.value,
-    Bacterial: Bacterial.value,
-    Cast: Cast.value,
-    Crystals: Crystals.value,
-    Other: Other.value,
-  };
+  RBC: getSelectValue("RBC"),
+  Puscells: getSelectValue("Puscells"),
+  Epithelialcells: getSelectValue("Epithelialcells"),
+  Amorphousmaterial: getSelectValue("Amorphousmaterial"),
+  Bacterial: getSelectValue("Bacterial"),
+  Cast: getSelectValue("Cast"),
+  Crystals: getSelectValue("Crystals"),
+  Other: getSelectValue("Other"),
+};
+
 
   createUrinePdf(data, false);
   createUrinePdf(data, true);
 }
 
-function isDefaultSelected(selectId) {
-  const sel = document.getElementById(selectId);
-  if (!sel) return true;
+function getSelectValue(id) {
+  const sel = document.getElementById(id);
+  const other = document.getElementById(id + "_other");
 
-  const firstValue = sel.options[0].value;
-  return sel.value === firstValue;
+  if (sel.value === "OTHER" && other && other.value.trim() !== "") {
+    return other.value.trim();
+  }
+  return sel.value;
 }
+
 
 
 // ================= CREATE PDF =================
@@ -160,7 +157,7 @@ function createUrinePdf(data, colored = false) {
 
   pdf.rect(10, y - 6, 190, 8);
   pdf.text("INVESTIGATION", 20, y);
-  pdf.text("RESULT", 80, y);
+  pdf.text("RESULT", 100, y);
   y += 10;
 
   // ================= ROW FUNCTION =================
@@ -168,14 +165,14 @@ function createUrinePdf(data, colored = false) {
     pdf.setFont("Helvetica", "normal");
     pdf.setTextColor(0);
     pdf.text(label, 20, y);
-    pdf.text(":", 80, y);
+    pdf.text(":", 100, y);
 
     if (isManual) {
       pdf.setFont("Helvetica", "bold");
       pdf.setTextColor(255, 0, 0);
     }
 
-    pdf.text(value || "-", 85, y);
+    pdf.text(value || "-", 105, y);
     pdf.setTextColor(0);
     y += 7;
   }
@@ -193,13 +190,13 @@ row("APPEARANCE", data.Appearance, !isDefaultSelected("Appearance"));
 row("REACTION", "Acidic");
 
 
-
   y += 4;
   pdf.setFont("Helvetica", "bold");
   pdf.text("CHEMICAL EXAMINATION", 20, y);
   y += 7;
 
 row("ALBUMIN", data.Albumin, !isDefaultSelected("Albumin"));
+
 row("SUGAR", data.Sugar, !isDefaultSelected("Sugar"));
 row("BILE SALT", data.Bsalt, !isDefaultSelected("Bsalt"));
 row(
