@@ -308,3 +308,15 @@ function compare(val, range) {
   if (val > high) return { flag: "H", abnormal: true };
   return { flag: "", abnormal: false };
 }
+function toUpperCaseInput(el) {
+  el.value = el.value.toUpperCase();
+}
+
+function onlyNumberCommaDot(el) {
+  el.value = el.value.replace(/[^0-9.,]/g, "");
+}
+
+function autoSelectGender() {
+  // optional – leave empty or remove call
+}
+
