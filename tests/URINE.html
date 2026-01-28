@@ -134,12 +134,21 @@
 </select>
 
 <label>BILE PIGMENT</label>
-<select class="input" id="Bpigment">
-  <option value="NIL" selected >NIL</option>
-  <option value="SUGAR">SUGAR</option>
-  <option value="Absent">Absent</option>
-  <option value="Present">Present</option>
+<select class="input" id="Bpigment" onchange="toggleBileOther(this)">
+  <option value="NIL" selected>NIL</option>
+  <option value="ABSENT">Absent</option>
+  <option value="PRESENT">Present</option>
+  <option value="OTHER">Other</option>
 </select>
+
+<input
+  type="text"
+  class="input"
+  id="Bpigment_other"
+  placeholder="Specify other"
+  style="display:none;"
+/>
+
 
 </div>
 
@@ -165,7 +174,7 @@
 
 <label>PUS CELLS</label>
 <select class="input" id="Puscells">
-  <option value="Occasional" selected >Occasional</option>
+  <option value="Occasional /hpf" selected >Occasional /hpf</option>
   <option value="1 - 2  /hpf">1 - 2  /hpf</option>
   <option value="2 - 4 /hpf">2 - 4 /hpf</option>
   <option value="5 - 7 /hpf">5 - 7 /hpf</option>
@@ -247,6 +256,6 @@
 
 
 
-  <script src="cbc.js"></script>
+  <script src="URINE.js"></script>
 </body>
 </html>
