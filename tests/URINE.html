@@ -22,23 +22,23 @@
 
       <label>Patient Name</label>
       <input
-  class="input"
+  class="input full-row"
   id="patient_name"
   value="MRS. SAFIYA ANJUM"
    oninput="toUpperCaseInput(this); autoSelectGender();" />
 
 
       <label>Referred By</label>
-      <input class="input" id="ref_by" value="DR. MUJAHID KHAN SIR"  oninput="toUpperCaseInput(this)" />
+      <input class="input full-row" id="ref_by" value="DR. MUJAHID KHAN SIR"  oninput="toUpperCaseInput(this)" />
 
       <label>Sample</label>
-      <input class="input" id="sample" value="RECEIVED FROM OUTSIDE"  oninput="toUpperCaseInput(this)" />
+      <input class="input full-row" id="sample" value="RECEIVED FROM OUTSIDE"  oninput="toUpperCaseInput(this)" />
 
       <div class="row">
         <div style="width: 50%;">
           <label>Age</label>
           <input
-            class="input"
+            class="input full-row"
             id="age"
             inputmode="numeric"
             oninput="onlyNumberCommaDot(this)"
@@ -48,7 +48,7 @@
 
         <div style="width: 50%;">
           <label>Sex</label>
-          <select class="input" id="sex">
+          <select class="input full-row" id="sex">
             <option>Male</option>
             <option selected>Female</option>
             <option>Other</option>
@@ -57,11 +57,11 @@
       </div>
 
       <label>Date</label>
-      <input class="input" id="date" type="date" />
+      <input class="input full-row" id="date" type="date" />
 
       <label>LRN</label>
       <input
-        class="input"
+        class="input full-row"
         id="lrn"
         inputmode="numeric"
         oninput="onlyNumberCommaDot(this)"
@@ -74,16 +74,16 @@
   <div class="grid">
 
     <label>COLOUR</label>
-    <select class="input" id="Colour" onchange="toggleOther(this)">
+    <select class="input full-row" id="Colour" onchange="toggleOther(this)">
       <option value="Pale Yellow" selected>Pale Yellow</option>
       <option value="Yellow">Yellow</option>
       <option value="Reddish">Reddish</option>
       <option value="OTHER">Other</option>
     </select>
-    <input class="input" id="Colour_other" placeholder="Specify Colour" style="display:none">
+    <input class="input full-row" id="Colour_other" placeholder="Specify Colour" style="display:none">
 
     <label>APPEARANCE</label>
-    <select class="input" id="Appearance" onchange="toggleOther(this)">
+    <select class="input full-row" id="Appearance" onchange="toggleOther(this)">
       <option value="Clear" selected>Clear</option>
       <option value="TURBID">TURBID</option>
       <option value="S TURBID">S TURBID</option>
@@ -91,7 +91,7 @@
       <option value="Traces">Traces</option>
       <option value="OTHER">Other</option>
     </select>
-    <input class="input" id="Appearance_other" placeholder="Specify Appearance" style="display:none">
+    <input class="input full-row" id="Appearance_other" placeholder="Specify Appearance" style="display:none">
 
   </div>
 </div>
@@ -103,7 +103,7 @@
   <div class="grid">
 
     <label>ALBUMIN</label>
-    <select class="input" id="Albumin" onchange="toggleOther(this)">
+    <select class="input full-row" id="Albumin" onchange="toggleOther(this)">
       <option value="NIL" selected>NIL</option>
       <option value="Traces">Traces</option>
       <option value="Present +">Present +</option>
@@ -111,10 +111,10 @@
       <option value="Present +++">Present +++</option>
       <option value="OTHER">Other</option>
     </select>
-    <input class="input" id="Albumin_other" placeholder="Specify Albumin" style="display:none">
+    <input class="input full-row" id="Albumin_other" placeholder="Specify Albumin" style="display:none">
 
     <label>SUGAR</label>
-    <select class="input" id="Sugar" onchange="toggleOther(this)">
+    <select class="input full-row" id="Sugar" onchange="toggleOther(this)">
       <option value="NIL" selected>NIL</option>
       <option value="Traces">Traces</option>
       <option value="Present +">Present +</option>
@@ -122,24 +122,24 @@
       <option value="Present +++">Present +++</option>
       <option value="OTHER">Other</option>
     </select>
-    <input class="input" id="Sugar_other" placeholder="Specify Sugar" style="display:none">
+    <input class="input full-row" id="Sugar_other" placeholder="Specify Sugar" style="display:none">
 
     <label>BILE SALT</label>
-    <select class="input" id="Bsalt" onchange="toggleOther(this)">
+    <select class="input full-row" id="Bsalt" onchange="toggleOther(this)">
       <option value="Absent" selected>Absent</option>
       <option value="Present">Present</option>
       <option value="OTHER">Other</option>
     </select>
-    <input class="input" id="Bsalt_other" placeholder="Specify Bile Salt" style="display:none">
+    <input class="input full-row" id="Bsalt_other" placeholder="Specify Bile Salt" style="display:none">
 
     <label>BILE PIGMENT</label>
-    <select class="input" id="Bpigment" onchange="toggleOther(this)">
+    <select class="input full-row" id="Bpigment" onchange="toggleOther(this)">
       <option value="NIL" selected>NIL</option>
       <option value="Absent">Absent</option>
       <option value="Present">Present</option>
       <option value="OTHER">Other</option>
     </select>
-    <input class="input" id="Bpigment_other" placeholder="Specify Bile Pigment" style="display:none">
+    <input class="input full-row" id="Bpigment_other" placeholder="Specify Bile Pigment" style="display:none">
 
   </div>
 </div>
@@ -150,73 +150,73 @@
   <div class="grid">
 
     <label>R.B.C.</label>
-    <select class="input" id="RBC" onchange="toggleOther(this)">
+    <select class="input full-row" id="RBC" onchange="toggleOther(this)">
       <option value="NIL" selected>NIL</option>
       <option value="1 - 2 /hpf">1 - 2 /hpf</option>
       <option value="2 - 4 /hpf">2 - 4 /hpf</option>
       <option value="5 - 10 /hpf">5 - 10 /hpf</option>
       <option value="OTHER">Other</option>
     </select>
-    <input class="input" id="RBC_other" placeholder="Specify RBC" style="display:none">
+    <input class="input full-row" id="RBC_other" placeholder="Specify RBC" style="display:none">
 
     <label>PUS CELLS</label>
-    <select class="input" id="Puscells" onchange="toggleOther(this)">
+    <select class="input full-row" id="Puscells" onchange="toggleOther(this)">
       <option value="Occasional /hpf" selected>Occasional /hpf</option>
       <option value="1 - 2 /hpf">1 - 2 /hpf</option>
       <option value="5 - 10 /hpf">5 - 10 /hpf</option>
       <option value="OTHER">Other</option>
     </select>
-    <input class="input" id="Puscells_other" placeholder="Specify Pus Cells" style="display:none">
+    <input class="input full-row" id="Puscells_other" placeholder="Specify Pus Cells" style="display:none">
 
     <label>EPITHELIAL CELLS</label>
-    <select class="input" id="Epithelialcells" onchange="toggleOther(this)">
+    <select class="input full-row" id="Epithelialcells" onchange="toggleOther(this)">
       <option value="NIL" selected>NIL</option>
       <option value="1 - 2 /hpf">1 - 2 /hpf</option>
       <option value="5 - 10 /hpf">5 - 10 /hpf</option>
       <option value="OTHER">Other</option>
     </select>
-    <input class="input" id="Epithelialcells_other" placeholder="Specify Epithelial Cells" style="display:none">
+    <input class="input full-row" id="Epithelialcells_other" placeholder="Specify Epithelial Cells" style="display:none">
 
     <label>AMORPHOUS MATERIAL</label>
-    <select class="input" id="Amorphousmaterial" onchange="toggleOther(this)">
+    <select class="input full-row" id="Amorphousmaterial" onchange="toggleOther(this)">
       <option value="NIL" selected>NIL</option>
       <option value="Traces">Traces</option>
       <option value="Present">Present</option>
       <option value="OTHER">Other</option>
     </select>
-    <input class="input" id="Amorphousmaterial_other" placeholder="Specify Material" style="display:none">
+    <input class="input full-row" id="Amorphousmaterial_other" placeholder="Specify Material" style="display:none">
 
     <label>BACTERIA</label>
-    <select class="input" id="Bacterial" onchange="toggleOther(this)">
+    <select class="input full-row" id="Bacterial" onchange="toggleOther(this)">
       <option value="NIL" selected>NIL</option>
       <option value="Present">Present</option>
       <option value="OTHER">Other</option>
     </select>
-    <input class="input" id="Bacterial_other" placeholder="Specify Bacteria" style="display:none">
+    <input class="input full-row" id="Bacterial_other" placeholder="Specify Bacteria" style="display:none">
 
     <label>CAST</label>
-    <select class="input" id="Cast" onchange="toggleOther(this)">
+    <select class="input full-row" id="Cast" onchange="toggleOther(this)">
       <option value="NIL" selected>NIL</option>
       <option value="Absent">Absent</option>
       <option value="OTHER">Other</option>
     </select>
-    <input class="input" id="Cast_other" placeholder="Specify Cast" style="display:none">
+    <input class="input full-row" id="Cast_other" placeholder="Specify Cast" style="display:none">
 
     <label>CRYSTALS</label>
-    <select class="input" id="Crystals" onchange="toggleOther(this)">
+    <select class="input full-row" id="Crystals" onchange="toggleOther(this)">
       <option value="NIL" selected>NIL</option>
       <option value="Absent">Absent</option>
       <option value="OTHER">Other</option>
     </select>
-    <input class="input" id="Crystals_other" placeholder="Specify Crystals" style="display:none">
+    <input class="input full-row" id="Crystals_other" placeholder="Specify Crystals" style="display:none">
 
     <label>OTHER FINDINGS</label>
-    <select class="input" id="Other" onchange="toggleOther(this)">
+    <select class="input full-row" id="Other" onchange="toggleOther(this)">
       <option value="NIL" selected>NIL</option>
       <option value="Absent">Absent</option>
       <option value="OTHER">Other</option>
     </select>
-    <input class="input" id="Other_other" placeholder="Specify Findings" style="display:none">
+    <input class="input full-row" id="Other_other" placeholder="Specify Findings" style="display:none">
 
   </div>
 </div>
