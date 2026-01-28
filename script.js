@@ -88,4 +88,33 @@ function formatWithCommas(input) {
   }
 }
 
+function formatRangeDisplay(range) {
+  if (!range) return "";
+
+  // expect "4000-10000" or "4000–10000"
+  let parts = range.split(/[-–]/);
+
+  if (parts.length !== 2) return range;
+
+  let start = Number(parts[0].replace(/,/g, ""));
+  let end = Number(parts[1].replace(/,/g, ""));
+
+  if (isNaN(start) || isNaN(end)) return range;
+
+  return (
+    start.toLocaleString("en-IN") +
+    " - " +
+    end.toLocaleString("en-IN")
+  );
+}
+//row(
+//   "TOTAL LEUCOCYTE COUNT",
+//   data.TLC,
+//   "/cumm",
+//   [formatRangeDisplay("4000-10000")],
+//   data.Sex
+// );
+
+
+
 
