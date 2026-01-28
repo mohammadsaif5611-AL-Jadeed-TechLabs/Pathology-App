@@ -17,227 +17,159 @@
     <h2 class="title">URINE ANALYSIS REPORT</h2>
 
     <!-- Patient Info -->
-    <div class="card">
-      <h3 class="card-title">Patient Information</h3>
+   <div class="card">
+  <h3 class="card-title">PHYSICAL EXAMINATION</h3>
+  <div class="grid">
 
-      <label>Patient Name</label>
-      <input
-  class="input"
-  id="patient_name"
-  value="MRS. SAFIYA ANJUM"
-   oninput="toUpperCaseInput(this); autoSelectGender();" />
+    <label>COLOUR</label>
+    <select class="input" id="Colour" onchange="toggleOther(this)">
+      <option value="Pale Yellow" selected>Pale Yellow</option>
+      <option value="Yellow">Yellow</option>
+      <option value="Reddish">Reddish</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <input class="input" id="Colour_other" placeholder="Specify Colour" style="display:none">
 
+    <label>APPEARANCE</label>
+    <select class="input" id="Appearance" onchange="toggleOther(this)">
+      <option value="Clear" selected>Clear</option>
+      <option value="TURBID">Turbid</option>
+      <option value="S TURBID">S Turbid</option>
+      <option value="Hazy">Hazy</option>
+      <option value="Traces">Traces</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <input class="input" id="Appearance_other" placeholder="Specify Appearance" style="display:none">
 
-      <label>Referred By</label>
-      <input class="input" id="ref_by" value="DR. MUJAHID KHAN SIR"  oninput="toUpperCaseInput(this)" />
-
-      <label>Sample</label>
-      <input class="input" id="sample" value="RECEIVED FROM OUTSIDE"  oninput="toUpperCaseInput(this)" />
-
-      <div class="row">
-        <div style="width: 50%;">
-          <label>Age</label>
-          <input
-            class="input"
-            id="age"
-            inputmode="numeric"
-            oninput="onlyNumberCommaDot(this)"
-            value="22"
-          />
-        </div>
-
-        <div style="width: 50%;">
-          <label>Sex</label>
-          <select class="input" id="sex">
-            <option>Male</option>
-            <option selected>Female</option>
-            <option>Other</option>
-          </select>
-        </div>
-      </div>
-
-      <label>Date</label>
-      <input class="input" id="date" type="date" />
-
-      <label>LRN</label>
-      <input
-        class="input"
-        id="lrn"
-        inputmode="numeric"
-        oninput="onlyNumberCommaDot(this)"
-        value="0590"
-      />
-    </div>
-
-    <!-- CBC Values -->
-    <div class="card">
-      <h3 class="card-title">PHYSICAL EXAMINATION</h3>
-
-     <div class="grid">
-
-  <!-- LEFT COLUMN -->
-  
-<label>COLOUR</label>
-<select class="input" id="Colour">
-   <option value="Pale Yellow"selected>Pale Yellow</option>
-  <option value="Yellow">Yellow</option>
- 
-  <option value="Reddish">Reddish</option>
-</select>
-
-<label>APPEARANCE</label>
-<select class="input" id="Appearance">
-  <option value="Clear" selected >Clear</option>
-  <option value="TURBID">TURBID</option>
-  <option value="S TURBID">S TURBID</option>
-
-  
-  <option value="Hazy">Hazy</option>
-  <option value="Traces">Traces</option>
-</select>
-
+  </div>
 </div>
 
-    </div>
+
     <!-- CBC Values -->
-    <div class="card">
-      <h3 class="card-title">CHEMICAL EXAMINATION</h3>
+   <div class="card">
+  <h3 class="card-title">CHEMICAL EXAMINATION</h3>
+  <div class="grid">
 
-     <div class="grid">
+    <label>ALBUMIN</label>
+    <select class="input" id="Albumin" onchange="toggleOther(this)">
+      <option value="NIL" selected>NIL</option>
+      <option value="Traces">Traces</option>
+      <option value="Present +">Present +</option>
+      <option value="Present ++">Present ++</option>
+      <option value="Present +++">Present +++</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <input class="input" id="Albumin_other" placeholder="Specify Albumin" style="display:none">
 
-  <!-- LEFT COLUMN -->
-  
-<label>ALBUMIN</label>
-<select class="input" id="Albumin">
-  <option value="NIL" selected >NIL</option>
-   <option value="Traces">Traces</option>
-  <option value="Present +">Present +</option>
-  <option value="Present ++">Present ++</option>
-  <option value="Present +++">Present +++</option>
- 
-</select>
-  
-<label>SUGAR </label>
-<select class="input" id="Sugar">
-  <option value="NIL" selected >NIL</option>
-   <option value="Traces">Traces</option>
-  <option value="Present +">Present +</option>
-  <option value="Present ++">Present ++</option>
-  <option value="Present +++">Present +++</option>
- 
-</select>
- 
-<label>BILE SALT</label>
-<select class="input" id="Bsalt">
-  <option value="Absent" selected >Absent</option>
-   <option value="Present">Present</option>
-</select>
+    <label>SUGAR</label>
+    <select class="input" id="Sugar" onchange="toggleOther(this)">
+      <option value="NIL" selected>NIL</option>
+      <option value="Traces">Traces</option>
+      <option value="Present +">Present +</option>
+      <option value="Present ++">Present ++</option>
+      <option value="Present +++">Present +++</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <input class="input" id="Sugar_other" placeholder="Specify Sugar" style="display:none">
 
-<label>BILE PIGMENT</label>
-<select class="input" id="Bpigment" onchange="toggleBileOther(this)">
-  <option value="NIL" selected>NIL</option>
-  <option value="ABSENT">Absent</option>
-  <option value="PRESENT">Present</option>
-  <option value="OTHER">Other</option>
-</select>
+    <label>BILE SALT</label>
+    <select class="input" id="Bsalt" onchange="toggleOther(this)">
+      <option value="Absent" selected>Absent</option>
+      <option value="Present">Present</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <input class="input" id="Bsalt_other" placeholder="Specify Bile Salt" style="display:none">
 
-<input
-  type="text"
-  class="input"
-  id="Bpigment_other"
-  placeholder="Specify other"
-  style="display:none;"
-/>
+    <label>BILE PIGMENT</label>
+    <select class="input" id="Bpigment" onchange="toggleOther(this)">
+      <option value="NIL" selected>NIL</option>
+      <option value="Absent">Absent</option>
+      <option value="Present">Present</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <input class="input" id="Bpigment_other" placeholder="Specify Bile Pigment" style="display:none">
 
-
+  </div>
 </div>
 
-    </div>
     <!-- CBC Values -->
-    <div class="card">
-      <h3 class="card-title">MICROSCOPIC EXAMINATION</h3>
+  <div class="card">
+  <h3 class="card-title">MICROSCOPIC EXAMINATION</h3>
+  <div class="grid">
 
-     <div class="grid">
+    <label>R.B.C.</label>
+    <select class="input" id="RBC" onchange="toggleOther(this)">
+      <option value="NIL" selected>NIL</option>
+      <option value="1 - 2 /hpf">1 - 2 /hpf</option>
+      <option value="2 - 4 /hpf">2 - 4 /hpf</option>
+      <option value="5 - 10 /hpf">5 - 10 /hpf</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <input class="input" id="RBC_other" placeholder="Specify RBC" style="display:none">
 
-  <!-- LEFT COLUMN -->
-  
-<label>R.B.C.</label>
-<select class="input" id="RBC">
-  <option value="NIL" selected >NIL</option>
-   <option value="1 - 2 /hpf">1 - 2 /hpf</option>
-  <option value="2 - 4 /hpf">2 - 4 /hpf</option>
- 
-  <option value="4 - 5 /hpf">4 - 5 /hpf</option>
-  <option value="5 - 10 /hpf">5 - 10 /hpf</option>
-  <option value="10 - 15 /hpf">10 - 15 /hpf</option>
-</select>
+    <label>PUS CELLS</label>
+    <select class="input" id="Puscells" onchange="toggleOther(this)">
+      <option value="Occasional /hpf" selected>Occasional /hpf</option>
+      <option value="1 - 2 /hpf">1 - 2 /hpf</option>
+      <option value="5 - 10 /hpf">5 - 10 /hpf</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <input class="input" id="Puscells_other" placeholder="Specify Pus Cells" style="display:none">
 
-<label>PUS CELLS</label>
-<select class="input" id="Puscells">
-  <option value="Occasional /hpf" selected >Occasional /hpf</option>
-  <option value="1 - 2  /hpf">1 - 2  /hpf</option>
-  <option value="2 - 4 /hpf">2 - 4 /hpf</option>
-  <option value="5 - 7 /hpf">5 - 7 /hpf</option>
-  <option value="5 - 10 /hpf">5 - 10 /hpf</option>
-  <option value="10 - 15 /hpf">10 - 15 /hpf</option>
-</select>
-  
-<label>EPITHELIAL CELLS</label>
-<select class="input" id="Epithelialcells">
-  <option value="NIL" selected >NIL</option>
-   <option value="1 - 2 /hpf">1 - 2 /hpf</option>
-  <option value="2 - 4 /hpf">2 - 4 /hpf</option>
- 
-  <option value="4 - 5 /hpf">4 - 5 /hpf</option>
-  <option value="5 - 10 /hpf">5 - 10 /hpf</option>
-  <option value="10 - 15 /hpf">10 - 15 /hpf</option>
-</select>
+    <label>EPITHELIAL CELLS</label>
+    <select class="input" id="Epithelialcells" onchange="toggleOther(this)">
+      <option value="NIL" selected>NIL</option>
+      <option value="1 - 2 /hpf">1 - 2 /hpf</option>
+      <option value="5 - 10 /hpf">5 - 10 /hpf</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <input class="input" id="Epithelialcells_other" placeholder="Specify Epithelial Cells" style="display:none">
 
-<label>AMORPHOUS MATERIAL</label>
-<select class="input" id="Amorphousmaterial">
-  <option value="NIL" selected>NIL</option>
-  <option value="Absent">Absent</option>
-  <option value="Traces">Traces</option>
-  <option value="Present">Present</option>
-  <option value="Present +">Present +</option>
-  <option value="Present ++">Present ++</option>
-</select>
+    <label>AMORPHOUS MATERIAL</label>
+    <select class="input" id="Amorphousmaterial" onchange="toggleOther(this)">
+      <option value="NIL" selected>NIL</option>
+      <option value="Traces">Traces</option>
+      <option value="Present">Present</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <input class="input" id="Amorphousmaterial_other" placeholder="Specify Material" style="display:none">
 
-<label>BACTERIA</label>
-<select class="input" id="Bacterial">
-  <option value="NIL" selected >NIL</option>
-   <option value="Absent">Absent</option>
-  <option value="Present">Present</option>
-  <option value="Present +">Present +</option>
-  <option value="Present ++">Present ++</option>
- 
-</select>
-  
-<label>CAST</label>
-<select class="input" id="Cast">
-  <option value="NIL" selected>NIL</option>
-   <option value="Absent">Absent</option>
+    <label>BACTERIA</label>
+    <select class="input" id="Bacterial" onchange="toggleOther(this)">
+      <option value="NIL" selected>NIL</option>
+      <option value="Present">Present</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <input class="input" id="Bacterial_other" placeholder="Specify Bacteria" style="display:none">
 
-</select>  
-  
-<label>CRYSTALS</label>
-<select class="input" id="Crystals">
-  <option value="NIL" selected>NIL</option>
-   <option value="Absent">Absent</option>
+    <label>CAST</label>
+    <select class="input" id="Cast" onchange="toggleOther(this)">
+      <option value="NIL" selected>NIL</option>
+      <option value="Absent">Absent</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <input class="input" id="Cast_other" placeholder="Specify Cast" style="display:none">
 
-</select>  
+    <label>CRYSTALS</label>
+    <select class="input" id="Crystals" onchange="toggleOther(this)">
+      <option value="NIL" selected>NIL</option>
+      <option value="Absent">Absent</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <input class="input" id="Crystals_other" placeholder="Specify Crystals" style="display:none">
 
-<label>OTHER FINDINGS</label>
-<select class="input" id="Other">
-  <option value="NIL" selected >NIL</option>
-   <option value="Absent">Absent</option>
-</select>
+    <label>OTHER FINDINGS</label>
+    <select class="input" id="Other" onchange="toggleOther(this)">
+      <option value="NIL" selected>NIL</option>
+      <option value="Absent">Absent</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <input class="input" id="Other_other" placeholder="Specify Findings" style="display:none">
 
-
+  </div>
 </div>
 
-    </div>
-
+    
 
     <button class="btn" onclick="generatePDF()">
       Generate PDF
