@@ -58,11 +58,10 @@ function toggleOther(select) {
 
   if (select.value === "OTHER") {
     otherInput.style.display = "block";
-    otherInput.required = true;
+    otherInput.focus();
   } else {
     otherInput.style.display = "none";
     otherInput.value = "";
-    otherInput.required = false;
   }
 }
 
@@ -126,11 +125,10 @@ function createUrinePdf(data, colored = false) {
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF("p", "mm", "a4");
 
-  if (colored && bgImgBase64) {
-    pdf.setGState(new pdf.GState({ opacity: 0.18 }));
-    pdf.addImage(bgImgBase64, "JPEG", 30, 95, 150, 120);
-    pdf.setGState(new pdf.GState({ opacity: 1 }));
-  }
+if (colored && bgImgBase64) {
+  pdf.addImage(bgImgBase64, "JPEG", 30, 95, 150, 120);
+}
+
 
   if (colored && topImgBase64) {
     pdf.addImage(topImgBase64, "JPEG", 0, 0, 210, 52);
@@ -319,4 +317,3 @@ function onlyNumberCommaDot(el) {
 function autoSelectGender() {
   // optional – leave empty or remove call
 }
-
