@@ -126,7 +126,14 @@ function createUrinePdf(data, colored = false) {
   const pdf = new jsPDF("p", "mm", "a4");
 
 if (colored && bgImgBase64) {
-  pdf.addImage(bgImgBase64, "JPEG", 30, 95, 150, 120);
+  const bgWidth = 150;
+  const bgHeight = 120;
+  const bgX = (210 - bgWidth) / 2;
+  const bgY = 95; // 👈 thoda niche
+
+  pdf.setGState(new pdf.GState({ opacity: 0.18 }));
+  pdf.addImage(bgImgBase64, "JPEG", bgX, bgY, bgWidth, bgHeight);
+  pdf.setGState(new pdf.GState({ opacity: 1 }));
 }
 
 
