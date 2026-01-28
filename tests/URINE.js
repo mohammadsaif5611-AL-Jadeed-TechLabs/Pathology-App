@@ -52,6 +52,19 @@ function formatDateDDMMYY(d) {
   const [y, m, day] = d.split("-");
   return `${day}/${m}/${y}`;
 }
+function toggleOther(select) {
+  const otherInput = document.getElementById(select.id + "_other");
+  if (!otherInput) return;
+
+  if (select.value === "OTHER") {
+    otherInput.style.display = "block";
+    otherInput.required = true;
+  } else {
+    otherInput.style.display = "none";
+    otherInput.value = "";
+    otherInput.required = false;
+  }
+}
 
 
 
