@@ -114,6 +114,18 @@ function formatRangeDisplay(range) {
 //   [formatRangeDisplay("4000-10000")],
 //   data.Sex
 // );
+function toggleBileOther(select) {
+  const otherInput = document.getElementById("Bpigment_other");
+
+  if (select.value === "OTHER") {
+    otherInput.style.display = "block";
+    otherInput.required = true;
+  } else {
+    otherInput.style.display = "none";
+    otherInput.value = "";
+    otherInput.required = false;
+  }
+}
 
 
 
