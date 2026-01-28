@@ -111,6 +111,13 @@ function getSelectValue(id) {
   }
   return sel.value;
 }
+function isDefaultSelected(id) {
+  const sel = document.getElementById(id);
+  if (!sel) return true;
+
+  const defaultOption = sel.options[sel.selectedIndex];
+  return defaultOption.hasAttribute("selected");
+}
 
 
 
